@@ -1,0 +1,15 @@
+␡ELF␂␁␁␃>␁�␐@�9@8
+@␟␞␆␄@@@�␂�␂␈␃␄␘␃␘␃␘␃␜␜␁␁␄�␆�␆␐␁␅␐␐␐�␃�␃␐␁␄   �␁�␁␐␁␆�-�=�=p␂x␂␐␂␆�-�=�=�␁�␁␈␄␄8␃8␃8␃  ␈␄␄X␃X␃X␃DD␄S�td␄8␃8␃8␃  ␈P�td␄� � � DD␄Q�td␆␐R�td␄�-�=�=`␂`␂␁/lib64/ld-linux-x86-64.so.2␄␐␅GNU␂�␄␃␄␔␃GNUį�ౕ��c��b�+␇l9*�J␄␐␁GNU␃␂␂	␁␆�	�e�mJ ␖␒,␒␋␒f ␑␒u ␌␒␝"libc.so.6srandtimeprintf__cxa_finalize__libc_start_mainGLIBC_2.2.5_ITM_deregisterTMCloneTable__gmon_start___ITM_registerTMCloneTable␂␂␂␂␂␂␁␁␁␐u␚i	␂>�=␈�␑�=␈`␑␈@␈␈@�?␆␁�?␆␃�?␆␅�?␆␇�?␆	�?␇␂�?␇␄�?␇␆�?␇␈�␏␞�H��␈H�␅�/H��t␂��H��␈��5�/��%�/␏␟�␏␞�h��������␏␞�h␁��������␏␞�h␂��������␏␞�h␃�������␏␞���%}/␏␟D�␏␞���%-/␏␟D�␏␞���%%/␏␟D�␏␞���%␝/␏␟D�␏␞���%␕/␏␟D�␏␞�1�I��^H��H���PTL�␅�␂H�
+O␂H�=��␕�.��H�=␙/H�␅␒/H9�t␕H�␅�.H��t	��␏␟��␏␟�H�=�.H�5�.H)�H��H��?H��␃H␁�H��t␔H�␅�.H��t␈��f␏␟D�␏␟��␏␞��=�.u+UH�=�.H��t␌H�=�.������d����␅}.␁]�␏␟�␏␟��␏␞��w����␏␞�UH��H��␐������������������-���?�E��M�Hc�Hi�gfffH�� ����␂����␟)����␂␁�␁�)��ʃ�␅~E�M�Hc�Hi�gfffH�� ����␂����␟)����␂␁�␁�)��ʋE���H�=�
+��>������M�Hc�Hi�gfffH�� ����␂����␟)����␂␁�␁�)��ʃ�␅␡p�M�Hc�Hi�gfffH�� ����␂����␟)����␂␁�␁�)��ʅ�tB�M�Hc�Hi�gfffH�� ����␂����␟)����␂␁�␁�)��ʋE���H�=^
+������@�M�Hc�Hi�gfffH�� ����␂����␟)����␂␁�␁�)��ʋE���H�=T
+��Z������␏␟�␏␞�AWL�=c*AVI��AUI��ATA��UH�-T*SL)�H��␈����H��␃t␟1�␏␟�L��L��D��A�␔�H��␁H9�u�H��␈[]A\A]A^A_�ff.␏␟��␏␞���␏␞�H��␈H��␈�␁␂Last digit of %d is %d and is greater than 5
+Last digit of %d is %d and is less than 6 and not 0
+Last digit of %d is %d and is 0
+␁␛␃;@␇����t����������,���\␕���������␌���4␁␔␁zR␁x␐␁␛␌␇␈�␁␔␜����/D␇␐$4␐���P␎␐F␎␘J␏␋w␈�?␚:*3$"␔\8���␐␔t0���@␜�A����␁E␎␐�␂C
+␆␃{␁␌␇␈D�����eF␎␐�␂I␎␘�␃E␎ �␄E␎(�␅D␎0�␆H␎8�␇G␎@n␎8A␎0A␎(B␎ B␎␘B␎␐B␎␈␐�����␅�␑`␑␁␁␌␐
+�␓␙�=␛␈␚�=␜␈���o�␃␅�␄␆�␃
+�␋␘␕␃�?␂`␔␇␗@␆␇�␅␈�	␘␞␈���o␁␈���o`␅���o␁���oH␅���o␃�=0␐@␐P␐`␐␈@GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0␃␁␘␃␃␂8␃␃␃X␃␃␄|␃␃␅�␃␃␆�␃␃␇�␄␃␈H␅␃	`␅␃
+�␅␃␋@␆␃␌␐␃
+ ␐␃␎p␐␃␏�␐␃␐�␐␃␑�␓␃␒ ␃␓� ␃␔� ␃␕�=␃␖�=␃␗�=␃␘�?␃␙@␃␚␐@␃␛␁␄��␌␂␐�␐␎␂␐ ␑!␂␐`␑7␁␚␐@␁F␁␖�=m␂␐�␑y␁␕�=�␄��␁␄���␁␔�!␄���␕�=�␁␗�=�␕�=�␓� �␁␘�?�␁␂␌␐␋␁␒␐�␓␅␛␁ �␁ ␙@7␁␐␙␐@␕␁␒␂␑�␓>␁␒R␁␒q␁␒�␁␐␙@�␁ �␁␑␂␙␈@�␁␑␒ ␄�␁␒�␁␒␐0␓e�␐␚␘@�␁␒␐�␐/�␁␐␚␐@�␁␒␐�␑�␁�␁␑␂␙␐@�␁ ␕␂"r␁␒crtstuff.cderegister_tm_clones__do_global_dtors_auxcompleted.8061__do_global_dtors_aux_fini_array_entryframe_dummy__frame_dummy_init_array_entry1-last_digit.c__FRAME_END____init_array_end_DYNAMIC__init_array_start__GNU_EH_FRAME_HDR_GLOBAL_OFFSET_TABLE___libc_csu_fini_ITM_deregisterTMCloneTable_edataprintf@@GLIBC_2.2.5__libc_start_main@@GLIBC_2.2.5srand@@GLIBC_2.2.5__data_start__gmon_start____dso_handle_IO_stdin_usedtime@@GLIBC_2.2.5__libc_csu_init__bss_startmain__TMC_END___ITM_registerTMCloneTable__cxa_finalize@@GLIBC_2.2.5.symtab.strtab.shstrtab.interp.note.gnu.property.note.gnu.build-id.note.ABI-tag.gnu.hash.dynsym.dynstr.gnu.version.gnu.version_r.rela.dyn.rela.plt.init.plt.got.plt.sec.text.fini.rodata.eh_frame_hdr.eh_frame.init_array.fini_array.dynamic.data.bss.comment␛␁␂␘␃␘␃␜␁#␇␂8␃8␃ ␈6␇␂X␃X␃$␄I␇␂|␃|␃ ␄W���o␂�␃�␃$␆␈a␋␂�␃�␃�␇␁␈␘i␃␂�␄�␄�␁q���o␂H␅H␅␔␆␂␂~���o␂`␅`␅ ␇␁␈�␄␂�␅�␅�␆␈␘�␄B@␆@␆`␆␘␈␘�␁␆␐␐␛␄�␁␆ ␐ ␐P␐␐�␁␆p␐p␐␐␐␐�␁␆�␐�␐@␐␐�␁␆�␐�␐�␂␐�␁␆�␓�␓
+␄�␁␂  �␈�␁␂� � D␄�␁␂� � ␈␁␈�␎␃�=�-␈␈␈�␏␃�=�-␈␈␈�␆␃�=�-�␁␇␈␐�␁␃�?�/`␈␈␆␁␁␃@0␐␈␌␁␈␃␐@␐0␈␁␑␁␁0␐0+␁␁␁␂@0`␆␝.␈␘	␃�61␂␁␑␃�8␚␁␁
