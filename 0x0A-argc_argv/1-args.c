@@ -2,15 +2,16 @@
 
 /**
  * main - prints the number of arguments passed into it
- * @argc: argument count
- * @argv: argument vector
+ * @argc: number of arguments
+ * @argv: array of arguments
  *
  * Return: 0
  */
 int main(int argc, char *argv[])
 {
 	(void)argv;
-	printf("%d\n", argc - 1);
+	/* Print the total number of arguments, including the program name */
+	printf("%d\n", argc);
 
 	return (0);
 }
