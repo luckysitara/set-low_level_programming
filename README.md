@@ -1,4 +1,4 @@
-<
+
 
     Home
     My Planning
@@ -11,37 +11,146 @@
     My Profile
 
 SE 201: Data Structures and Algorithms I Average: 0.0%
-C - malloc, free
-Your Course Guides
-Coding Project: malloc and free
-Coding Project: malloc and free
+Dynamic Memory Allocation
+Automatic and Dynamic Allocation, Malloc and Free
+String Literals and .rodata (Advanced)
+Pop Quiz: Data Cleaning
+C Programming
+Coding Project: More on malloc and free
+Coding Project: More on malloc and free
 
     Weight: 5
     Project will start May 3, 2026 5:00 PM, must end by May 10, 2026 4:59 PM
 
-High five! Another one checked off.
+Another step in your dev journey—forward we go!
 
 
-Now move forward to do a check of what you’ve learnt!
+Let’s do a quick check of what you’ve learnt, before we move on to the project submission.
 
 
 Quiz questions
 Great! You've completed the quiz successfully! Keep going! (Show quiz)
 Tasks
-0. Float like a butterfly, sting like a bee
+0. Trust no one
 mandatory
 
 
-Write a function that creates an array of chars, and initializes it with a specific char.
+Write a function that allocates memory using malloc.
 
-    Prototype: char *create_array(unsigned int size, char c);
-    Returns NULL if size = 0
-    Returns a pointer to the array, or NULL if it fails
+    Prototype: void *malloc_checked(unsigned int b);
+    Returns a pointer to the allocated memory
+    if malloc fails, the malloc_checked function should cause normal process termination with a status value of 98
 
-julien@ubuntu:~/0x0a. malloc, free$ cat 0-main.c 
+julien@ubuntu:~/0x0b. more malloc, free$ cat 0-main.c
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+    char *c;
+    int *i;
+    float *f;
+    double *d;
+
+    c = malloc_checked(sizeof(char) * 1024);
+    printf("%p\n", (void *)c);
+    i = malloc_checked(sizeof(int) * 402);
+    printf("%p\n", (void *)i);
+    f = malloc_checked(sizeof(float) * 100000000);
+    printf("%p\n", (void *)f);
+    d = malloc_checked(INT_MAX);
+    printf("%p\n", (void *)d);
+    free(c);
+    free(i);
+    free(f);
+    free(d);
+    return (0);
+}
+julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 0-main.c 0-malloc_checked.c -o a
+julien@ubuntu:~/0x0b. more malloc, free$ ./a 
+0x1e39010
+0x1e39830
+0x7f31f6c19010
+julien@ubuntu:~/0x0b. more malloc, free$ echo $?
+98
+julien@ubuntu:~/0x0b. more malloc, free$ 
+
+
+Repo:
+
+    GitHub repository: set-low_level_programming
+    Directory: more_malloc_free
+    File: 0-malloc_checked.c
+
+1. string_nconcat
+mandatory
+
+
+Write a function that concatenates two strings.
+
+    Prototype: char *string_nconcat(char *s1, char *s2, unsigned int n);
+    The returned pointer shall point to a newly allocated space in memory, which contains s1, followed by the first n bytes of s2, and null terminated
+    If the function fails, it should return NULL
+    If n is greater or equal to the length of s2 then use the entire string s2
+    if NULL is passed, treat it as an empty string
+
+julien@ubuntu:~/0x0b. more malloc, free$ cat 1-main.c
+#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+    char *concat;
+
+    concat = string_nconcat("Best ", "School !!!", 6);
+    printf("%s\n", concat);
+    free(concat);
+    return (0);
+}
+julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 1-main.c 1-string_nconcat.c -o 1-string_nconcat
+julien@ubuntu:~/0x0b. more malloc, free$ ./1-string_nconcat
+Best School
+julien@ubuntu:~/0x0b. more malloc, free$ 
+
+
+Repo:
+
+    GitHub repository: set-low_level_programming
+    Directory: more_malloc_free
+    File: 1-string_nconcat.c
+
+2. _calloc
+mandatory
+
+
+Write a function that allocates memory for an array, using malloc.
+
+    Prototype: void *_calloc(unsigned int nmemb, unsigned int size);
+    The _calloc function allocates memory for an array of nmemb elements of size bytes each and returns a pointer to the allocated memory.
+    The memory is set to zero
+    If nmemb or size is 0, then _calloc returns NULL
+    If malloc fails, then _calloc returns NULL
+
+FYI: The standard library provides a different function: calloc. Run man calloc to learn more.
+
+julien@ubuntu:~/0x0b. more malloc, free$ cat 2-main.c
+#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * simple_print_buffer - prints buffer in hexa
@@ -72,321 +181,114 @@ void simple_print_buffer(char *buffer, unsigned int size)
 }
 
 /**
- * main - check the code for School students.
+ * main - check the code
  *
  * Return: Always 0.
  */
 int main(void)
 {
-    char *buffer;
+    char *a;
 
-    buffer = create_array(98, 'H');
-    if  (buffer == NULL)
-    {
-        printf("failed to allocate memory\n");
-        return (1);
-    }
-    simple_print_buffer(buffer, 98);
-    free(buffer);
+    a = _calloc(98, sizeof(char));
+    strcpy(a, "Best");
+    strcpy(a + 4, " School! :)\n");
+    a[97] = '!';
+    simple_print_buffer(a, 98);
+    free(a);
     return (0);
 }
-julien@ubuntu:~/0x0a. malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 0-main.c 0-create_array.c -o a
-julien@ubuntu:~/0x0a. malloc, free$ ./a 
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-0x48 0x48 0x48 0x48 0x48 0x48 0x48 0x48
-julien@ubuntu:~/0x0a. malloc, free$ 
+julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 2-main.c 2-calloc.c -o 2-calloc
+julien@ubuntu:~/0x0b. more malloc, free$ ./2-calloc
+0x42 0x65 0x73 0x74 0x20 0x53 0x63 0x68 0x6f 0x6f
+0x6c 0x21 0x20 0x3a 0x29 0x0a 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x21
+julien@ubuntu:~/0x0b. more malloc, free$ 
 
 
 Repo:
 
     GitHub repository: set-low_level_programming
-    Directory: malloc_free
-    File: 0-create_array.c
+    Directory: more_malloc_free
+    File: 2-calloc.c
 
-1. The woman who has no imagination has no wings
+3. array_range
 mandatory
 
 
-Write a function that returns a pointer to a newly allocated space in memory, which contains a copy of the string given as a parameter.
+Write a function that creates an array of integers.
 
-    Prototype: char *_strdup(char *str);
-    The _strdup() function returns a pointer to a new string which is a duplicate of the string str. Memory for the new string is obtained with malloc, and can be freed with free.
-    Returns NULL if str = NULL
-    On success, the _strdup function returns a pointer to the duplicated string. It returns NULL if insufficient memory was available
+    Prototype: int *array_range(int min, int max);
+    The array created should contain all the values from min (included) to max (included), ordered from min to max
+    Return: the pointer to the newly created array
+    If min > max, return NULL
+    If malloc fails, return NULL
 
-FYI: The standard library provides a similar function: strdup. Run man strdup to learn more.
-
-julien@ubuntu:~/0x0a. malloc, free$ cat 1-main.c
+julien@ubuntu:~/0x0b. more malloc, free$ cat 3-main.c
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
- * main - check the code for School students.
- *
- * Return: Always 0.
- */
-int main(void)
-{
-    char *s;
-
-    s = _strdup("DIY SE");
-    if (s == NULL)
-    {
-        printf("failed to allocate memory\n");
-        return (1);
-    }
-    printf("%s\n", s);
-    free(s);
-    return (0);
-}
-julien@ubuntu:~/0x0a. malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 1-main.c 1-strdup.c -o s
-julien@ubuntu:~/0x0a. malloc, free$ ./s 
-DIY SE
-julien@ubuntu:~/0x0a. malloc, free$ 
-
-
-Repo:
-
-    GitHub repository: set-low_level_programming
-    Directory: malloc_free
-    File: 1-strdup.c
-
-2. He who is not courageous enough to take risks will accomplish nothing in life
-mandatory
-
-
-Write a function that concatenates two strings.
-
-    Prototype: char *str_concat(char *s1, char *s2);
-    The returned pointer should point to a newly allocated space in memory which contains the contents of s1, followed by the contents of s2, and null terminated
-    if NULL is passed, treat it as an empty string
-    The function should return NULL on failure
-
-julien@ubuntu:~/0x0a. malloc, free$ cat 2-main.c
-#include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-/**
- * main - check the code for School students.
- *
- * Return: Always 0.
- */
-int main(void)
-{
-    char *s;
-
-    s = str_concat("Betty ", "School");
-    if (s == NULL)
-    {
-        printf("failed\n");
-        return (1);
-    }
-    printf("%s\n", s);
-    free(s);
-    return (0);
-}
-julien@ubuntu:~/0x0a. malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 2-main.c 2-str_concat.c -o c
-julien@ubuntu:~/c/curriculum_by_julien/low_level_programming/0x0a. malloc, free$ ./c | cat -e
-Betty School$
-julien@ubuntu:~/c/curriculum_by_julien/low_level_programming/0x0a. malloc, free$ 
-
-
-Repo:
-
-    GitHub repository: set-low_level_programming
-    Directory: malloc_free
-    File: 2-str_concat.c
-
-3. If you even dream of beating me you'd better wake up and apologize
-mandatory
-
-
-Write a function that returns a pointer to a 2 dimensional array of integers.
-
-    Prototype: int **alloc_grid(int width, int height);
-    Each element of the grid should be initialized to 0
-    The function should return NULL on failure
-    If width or height is 0 or negative, return NULL
-
-julien@ubuntu:~/0x0a. malloc, free$ cat 3-main.c
-#include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-/**
- * print_grid - prints a grid of integers
- * @grid: the address of the two dimensional grid
- * @width: width of the grid
- * @height: height of the grid
+ * simple_print_buffer - prints buffer in hexa
+ * @buffer: the address of memory to print
+ * @size: the size of the memory to print
  *
  * Return: Nothing.
  */
-void print_grid(int **grid, int width, int height)
+void simple_print_buffer(int *buffer, unsigned int size)
 {
-    int w;
-    int h;
+    unsigned int i;
 
-    h = 0;
-    while (h < height)
+    i = 0;
+    while (i < size)
     {
-        w = 0;
-        while (w < width)
+        if (i % 10)
         {
-            printf("%d ", grid[h][w]);
-            w++;
+            printf(" ");
         }
-        printf("\n");
-        h++;
-    }   
+        if (!(i % 10) && i)
+        {
+            printf("\n");
+        }
+        printf("0x%02x", buffer[i]);
+        i++;
+    }
+    printf("\n");
 }
 
 /**
- * main - check the code for School students.
+ * main - check the code
  *
  * Return: Always 0.
  */
 int main(void)
 {
-    int **grid;
+    int *a;
 
-    grid = alloc_grid(6, 4);
-    if (grid == NULL)
-    {
-        return (1);
-    }
-    print_grid(grid, 6, 4);
-    printf("\n");
-    grid[0][3] = 98;
-    grid[3][4] = 402;
-    print_grid(grid, 6, 4);
+    a = array_range(0, 10);
+    simple_print_buffer(a, 11);
+    free(a);
     return (0);
 }
-julien@ubuntu:~/0x0a. malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 3-main.c 3-alloc_grid.c -o g
-julien@ubuntu:~/0x0a. malloc, free$ ./g
-0 0 0 0 0 0 
-0 0 0 0 0 0 
-0 0 0 0 0 0 
-0 0 0 0 0 0 
-
-0 0 0 98 0 0 
-0 0 0 0 0 0 
-0 0 0 0 0 0 
-0 0 0 0 402 0 
-julien@ubuntu:~/0x0a. malloc, free$
+julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 3-main.c 3-array_range.c -o 3-array_range
+julien@ubuntu:~/0x0b. more malloc, free$ ./3-array_range
+0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09
+0x0a
+julien@ubuntu:~/0x0b. more malloc, free$ 
 
 
 Repo:
 
     GitHub repository: set-low_level_programming
-    Directory: malloc_free
-    File: 3-alloc_grid.c
-
-4. It's not bragging if you can back it up
-mandatory
-
-
-Write a function that frees a 2 dimensional grid previously created by your alloc_grid function.
-
-    Prototype: void free_grid(int **grid, int height);
-    Note that we will compile with your alloc_grid.c file. Make sure it compiles.
-
-julien@ubuntu:~/0x0a. malloc, free$ cat 4-main.c
-#include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-/**
- * print_grid - prints a grid of integers
- * @grid: the address of the two dimensional grid
- * @width: width of the grid
- * @height: height of the grid
- *
- * Return: Nothing.
- */
-void print_grid(int **grid, int width, int height)
-{
-    int w;
-    int h;
-
-    h = 0;
-    while (h < height)
-    {
-        w = 0;
-        while (w < width)
-        {
-            printf("%d ", grid[h][w]);
-            w++;
-        }
-        printf("\n");
-        h++;
-    }   
-}
-
-/**
- * main - check the code for School students.
- *
- * Return: Always 0.
- */
-int main(void)
-{
-    int **grid;
-
-    grid = alloc_grid(6, 4);
-    if (grid == NULL)
-    {
-        return (1);
-    }
-    print_grid(grid, 6, 4);
-    printf("\n");
-    grid[0][3] = 98;
-    grid[3][4] = 402;
-    print_grid(grid, 6, 4);
-    free_grid(grid, 4);
-    return (0);
-}
-julien@ubuntu:~/0x0a. malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 4-main.c 3-alloc_grid.c 4-free_grid.c -o f
-julien@ubuntu:~/0x0a. malloc, free$ valgrind ./f
-==5013== Memcheck, a memory error detector
-==5013== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==5013== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==5013== Command: ./f
-==5013== 
-0 0 0 0 0 0 
-0 0 0 0 0 0 
-0 0 0 0 0 0 
-0 0 0 0 0 0 
-
-0 0 0 98 0 0 
-0 0 0 0 0 0 
-0 0 0 0 0 0 
-0 0 0 0 402 0 
-==5013== 
-==5013== HEAP SUMMARY:
-==5013==     in use at exit: 0 bytes in 0 blocks
-==5013==   total heap usage: 6 allocs, 6 frees, 1,248 bytes allocated
-==5013== 
-==5013== All heap blocks were freed -- no leaks are possible
-==5013== 
-==5013== For counts of detected and suppressed errors, rerun with: -v
-==5013== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-julien@ubuntu:~/0x0a. malloc, free$ 
-
-
-Repo:
-
-    GitHub repository: set-low_level_programming
-    Directory: malloc_free
-    File: 4-free_grid.c
+    Directory: more_malloc_free
+    File: 3-array_range.c
 
 Copyright © 2026 SET, All rights reserved.
-
