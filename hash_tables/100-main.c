@@ -33,14 +33,3 @@ int main(void)
         shash_table_delete(ht);
 	return (EXIT_SUCCESS);
 }
-julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 100-main.c 100-sorted_hash_table.c 1-djb2.c 2-key_index.c -o sht	
-julien@ubuntu:~/0x1A. Hash tables$ ./sht 
-{'y': '0'}
-{'j': '1', 'y': '0'}
-{'c': '2', 'j': '1', 'y': '0'}
-{'b': '3', 'c': '2', 'j': '1', 'y': '0'}
-{'b': '3', 'c': '2', 'j': '1', 'y': '0', 'z': '4'}
-{'b': '3', 'c': '2', 'j': '1', 'n': '5', 'y': '0', 'z': '4'}
-{'a': '6', 'b': '3', 'c': '2', 'j': '1', 'n': '5', 'y': '0', 'z': '4'}
-{'a': '6', 'b': '3', 'c': '2', 'j': '1', 'm': '7', 'n': '5', 'y': '0', 'z': '4'}
-{'z': '4', 'y': '0', 'n': '5', 'm': '7', 'j': '1', 'c': '2', 'b': '3', 'a': '6'}
