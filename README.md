@@ -1,294 +1,479 @@
 
 
-    Home
-    My Planning
-    Projects
-    Evaluation quizzes
-    My courses
-    Concepts
-    Sandboxes
-    Library
-    My Profile
+SE 201: Data Structures and Algorithms I Average: 130.88%
+Hash Tables
+Hash Table Structure and Node Management
+Hashing and Key Management
+Collision Handling Techniques
+Common Hash Table Operations with Code Examples
+Memory Management and Best Practices in Hash Tables
+AI: AI as Your Code Visualizer: Building Hash Tables
+Coding Project: Hash Tables
+AI Lab Assignment: Hash Table Collision Analysis
+Coding Project: Hash Tables
 
-SE 201: Data Structures and Algorithms I Average: 0.0%
-Dynamic Memory Allocation
-Automatic and Dynamic Allocation, Malloc and Free
-String Literals and .rodata (Advanced)
-Pop Quiz: Data Cleaning
-C Programming
-Coding Project: More on malloc and free
-Coding Project: More on malloc and free
+    Weight: 9
+    Project will start Jun 14, 2026 5:00 PM, must end by Jun 21, 2026 4:59 PM
 
-    Weight: 5
-    Project will start May 3, 2026 5:00 PM, must end by May 10, 2026 4:59 PM
-
-Another step in your dev journey—forward we go!
-
-
-Let’s do a quick check of what you’ve learnt, before we move on to the project submission.
-
-
-Quiz questions
-Great! You've completed the quiz successfully! Keep going! (Show quiz)
+You've reached the end of the course! This is amazing!
 Tasks
-0. Trust no one
+0. >>> ht = {}
 mandatory
 
+EW_Lesson Header.png
 
-Write a function that allocates memory using malloc.
+Write a function that creates a hash table.
 
-    Prototype: void *malloc_checked(unsigned int b);
-    Returns a pointer to the allocated memory
-    if malloc fails, the malloc_checked function should cause normal process termination with a status value of 98
+    Prototype: hash_table_t *hash_table_create(unsigned long int size);
+        where size is the size of the array
+    Returns a pointer to the newly created hash table
+    If something went wrong, your function should return NULL
 
-julien@ubuntu:~/0x0b. more malloc, free$ cat 0-main.c
-#include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-
-/**
- * main - check the code
- *
- * Return: Always 0.
- */
-int main(void)
-{
-    char *c;
-    int *i;
-    float *f;
-    double *d;
-
-    c = malloc_checked(sizeof(char) * 1024);
-    printf("%p\n", (void *)c);
-    i = malloc_checked(sizeof(int) * 402);
-    printf("%p\n", (void *)i);
-    f = malloc_checked(sizeof(float) * 100000000);
-    printf("%p\n", (void *)f);
-    d = malloc_checked(INT_MAX);
-    printf("%p\n", (void *)d);
-    free(c);
-    free(i);
-    free(f);
-    free(d);
-    return (0);
-}
-julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 0-main.c 0-malloc_checked.c -o a
-julien@ubuntu:~/0x0b. more malloc, free$ ./a 
-0x1e39010
-0x1e39830
-0x7f31f6c19010
-julien@ubuntu:~/0x0b. more malloc, free$ echo $?
-98
-julien@ubuntu:~/0x0b. more malloc, free$ 
-
-
-Repo:
-
-    GitHub repository: set-low_level_programming
-    Directory: more_malloc_free
-    File: 0-malloc_checked.c
-
-1. string_nconcat
-mandatory
-
-
-Write a function that concatenates two strings.
-
-    Prototype: char *string_nconcat(char *s1, char *s2, unsigned int n);
-    The returned pointer shall point to a newly allocated space in memory, which contains s1, followed by the first n bytes of s2, and null terminated
-    If the function fails, it should return NULL
-    If n is greater or equal to the length of s2 then use the entire string s2
-    if NULL is passed, treat it as an empty string
-
-julien@ubuntu:~/0x0b. more malloc, free$ cat 1-main.c
-#include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-/**
- * main - check the code
- *
- * Return: Always 0.
- */
-int main(void)
-{
-    char *concat;
-
-    concat = string_nconcat("Best ", "School !!!", 6);
-    printf("%s\n", concat);
-    free(concat);
-    return (0);
-}
-julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 1-main.c 1-string_nconcat.c -o 1-string_nconcat
-julien@ubuntu:~/0x0b. more malloc, free$ ./1-string_nconcat
-Best School
-julien@ubuntu:~/0x0b. more malloc, free$ 
-
-
-Repo:
-
-    GitHub repository: set-low_level_programming
-    Directory: more_malloc_free
-    File: 1-string_nconcat.c
-
-2. _calloc
-mandatory
-
-
-Write a function that allocates memory for an array, using malloc.
-
-    Prototype: void *_calloc(unsigned int nmemb, unsigned int size);
-    The _calloc function allocates memory for an array of nmemb elements of size bytes each and returns a pointer to the allocated memory.
-    The memory is set to zero
-    If nmemb or size is 0, then _calloc returns NULL
-    If malloc fails, then _calloc returns NULL
-
-FYI: The standard library provides a different function: calloc. Run man calloc to learn more.
-
-julien@ubuntu:~/0x0b. more malloc, free$ cat 2-main.c
-#include "main.h"
-#include <stdio.h>
+julien@ubuntu:~/0x1A. Hash tables$ cat 0-main.c 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include "hash_tables.h"
 
 /**
- * simple_print_buffer - prints buffer in hexa
- * @buffer: the address of memory to print
- * @size: the size of the memory to print
+ * main - check the code for
  *
- * Return: Nothing.
- */
-void simple_print_buffer(char *buffer, unsigned int size)
-{
-    unsigned int i;
-
-    i = 0;
-    while (i < size)
-    {
-        if (i % 10)
-        {
-            printf(" ");
-        }
-        if (!(i % 10) && i)
-        {
-            printf("\n");
-        }
-        printf("0x%02x", buffer[i]);
-        i++;
-    }
-    printf("\n");
-}
-
-/**
- * main - check the code
- *
- * Return: Always 0.
+ * Return: Always EXIT_SUCCESS.
  */
 int main(void)
 {
-    char *a;
+	hash_table_t *ht;
 
-    a = _calloc(98, sizeof(char));
-    strcpy(a, "Best");
-    strcpy(a + 4, " School! :)\n");
-    a[97] = '!';
-    simple_print_buffer(a, 98);
-    free(a);
-    return (0);
+	ht = hash_table_create(1024);
+	printf("%p\n", (void *)ht);
+	return (EXIT_SUCCESS);
 }
-julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 2-main.c 2-calloc.c -o 2-calloc
-julien@ubuntu:~/0x0b. more malloc, free$ ./2-calloc
-0x42 0x65 0x73 0x74 0x20 0x53 0x63 0x68 0x6f 0x6f
-0x6c 0x21 0x20 0x3a 0x29 0x0a 0x00 0x00 0x00 0x00
-0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
-0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
-0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
-0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
-0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
-0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
-0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
-0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x21
-julien@ubuntu:~/0x0b. more malloc, free$ 
+julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 0-main.c 0-hash_table_create.c -o a
+julien@ubuntu:~/0x1A. Hash tables$ ./a 
+0x238a010
+julien@ubuntu:~/0x1A. Hash tables$ valgrind ./a
+==7602== Memcheck, a memory error detector
+==7602== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==7602== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==7602== Command: ./a
+==7602== 
+0x51fc040
+==7602== 
+==7602== HEAP SUMMARY:
+==7602==     in use at exit: 8,208 bytes in 2 blocks
+==7602==   total heap usage: 2 allocs, 0 frees, 8,208 bytes allocated
+==7602== 
+==7602== LEAK SUMMARY:
+==7602==    definitely lost: 16 bytes in 1 blocks
+==7602==    indirectly lost: 8,192 bytes in 1 blocks
+==7602==      possibly lost: 0 bytes in 0 blocks
+==7602==    still reachable: 0 bytes in 0 blocks
+==7602==         suppressed: 0 bytes in 0 blocks
+==7602== Rerun with --leak-check=full to see details of leaked memory
+==7602== 
+==7602== For counts of detected and suppressed errors, rerun with: -v
+==7602== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+julien@ubuntu:~/0x1A. Hash tables$
 
+
+EW_Lesson Footer.png
 
 Repo:
 
     GitHub repository: set-low_level_programming
-    Directory: more_malloc_free
-    File: 2-calloc.c
+    Directory: hash_tables
+    File: 0-hash_table_create.c
 
-3. array_range
+1. djb2
 mandatory
 
+EW_Lesson Header.png
 
-Write a function that creates an array of integers.
+Write a hash function implementing the djb2 algorithm.
 
-    Prototype: int *array_range(int min, int max);
-    The array created should contain all the values from min (included) to max (included), ordered from min to max
-    Return: the pointer to the newly created array
-    If min > max, return NULL
-    If malloc fails, return NULL
+    Prototype: unsigned long int hash_djb2(const unsigned char *str);
+    You are allowed to copy and paste the function from this page
 
-julien@ubuntu:~/0x0b. more malloc, free$ cat 3-main.c
-#include "main.h"
-#include <stdio.h>
+julien@ubuntu:~/0x1A. Hash tables$ cat 1-djb2.c 
+unsigned long int hash_djb2(const unsigned char *str)
+{
+	unsigned long int hash;
+	int c;
+
+	hash = 5381;
+	while ((c = *str++))
+	{
+		hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+	}
+	return (hash);
+}
+julien@ubuntu:~/0x1A. Hash tables$ 
+julien@ubuntu:~/0x1A. Hash tables$ cat 1-main.c 
 #include <stdlib.h>
 #include <string.h>
-
-/**
- * simple_print_buffer - prints buffer in hexa
- * @buffer: the address of memory to print
- * @size: the size of the memory to print
- *
- * Return: Nothing.
- */
-void simple_print_buffer(int *buffer, unsigned int size)
-{
-    unsigned int i;
-
-    i = 0;
-    while (i < size)
-    {
-        if (i % 10)
-        {
-            printf(" ");
-        }
-        if (!(i % 10) && i)
-        {
-            printf("\n");
-        }
-        printf("0x%02x", buffer[i]);
-        i++;
-    }
-    printf("\n");
-}
+#include <stdio.h>
+#include "hash_tables.h"
 
 /**
  * main - check the code
  *
- * Return: Always 0.
+ * Return: Always EXIT_SUCCESS.
  */
 int main(void)
 {
-    int *a;
+	char *s;
 
-    a = array_range(0, 10);
-    simple_print_buffer(a, 11);
-    free(a);
-    return (0);
+	s = "cisfun";
+	printf("%lu\n", hash_djb2((unsigned char *)s));
+	s = "Don't forget to tweet today";
+	printf("%lu\n", hash_djb2((unsigned char *)s));
+	s = "98";
+	printf("%lu\n", hash_djb2((unsigned char *)s));
+	return (EXIT_SUCCESS);
 }
-julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 3-main.c 3-array_range.c -o 3-array_range
-julien@ubuntu:~/0x0b. more malloc, free$ ./3-array_range
-0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09
-0x0a
-julien@ubuntu:~/0x0b. more malloc, free$ 
+julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 1-main.c 1-djb2.c -o b
+julien@ubuntu:~/0x1A. Hash tables$ ./b 
+6953392314605
+3749890792216096085
+5861846
+julien@ubuntu:~/0x1A. Hash tables$ 
 
+
+EW_Lesson Footer.png
 
 Repo:
 
     GitHub repository: set-low_level_programming
-    Directory: more_malloc_free
-    File: 3-array_range.c
+    Directory: hash_tables
+    File: 1-djb2.c
+
+2. key -> index
+mandatory
+
+EW_Lesson Header.png
+
+Write a function that gives you the index of a key.
+
+    Prototype: unsigned long int key_index(const unsigned char *key, unsigned long int size);
+        where key is the key
+        and size is the size of the array of the hash table
+    This function should use the hash_djb2 function that you wrote earlier
+    Returns the index at which the key/value pair should be stored in the array of the hash table
+    You will have to use this hash function for all the next tasks
+
+julien@ubuntu:~/0x1A. Hash tables$ cat 2-main.c 
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include "hash_tables.h"
+
+/**
+ * main - check the code
+ *
+ * Return: Always EXIT_SUCCESS.
+ */
+int main(void)
+{
+	char *s;
+	unsigned long int hash_table_array_size;
+
+	hash_table_array_size = 1024;
+	s = "cisfun";
+	printf("%lu\n", hash_djb2((unsigned char *)s));
+	printf("%lu\n", key_index((unsigned char *)s, hash_table_array_size));
+	s = "Don't forget to tweet today";
+	printf("%lu\n", hash_djb2((unsigned char *)s));
+	printf("%lu\n", key_index((unsigned char *)s, hash_table_array_size));
+	s = "98";
+	printf("%lu\n", hash_djb2((unsigned char *)s));
+	printf("%lu\n", key_index((unsigned char *)s, hash_table_array_size));	
+	return (EXIT_SUCCESS);
+}
+julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 2-main.c 1-djb2.c 2-key_index.c -o c
+julien@ubuntu:~/0x1A. Hash tables$ ./c 
+6953392314605
+237
+3749890792216096085
+341
+5861846
+470
+julien@ubuntu:~/0x1A. Hash tables$ 
+
+
+EW_Lesson Footer.png
+
+Repo:
+
+    GitHub repository: set-low_level_programming
+    Directory: hash_tables
+    File: 2-key_index.c
+
+3. >>> ht['betty'] = 'cool'
+mandatory
+
+EW_Lesson Header.png
+
+Write a function that adds an element to the hash table.
+
+    Prototype: int hash_table_set(hash_table_t *ht, const char *key, const char *value);
+        Where ht is the hash table you want to add or update the key/value to
+        key is the key. key can not be an empty string
+        and value is the value associated with the key. value must be duplicated. value can be an empty string
+    Returns: 1 if it succeeded, 0 otherwise
+    In case of collision, add the new node at the beginning of the list
+
+julien@ubuntu:~/0x1A. Hash tables$ cat 3-main.c 
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include "hash_tables.h"
+
+/**
+ * main - check the code
+ *
+ * Return: Always EXIT_SUCCESS.
+ */
+int main(void)
+{
+	hash_table_t *ht;
+
+	ht = hash_table_create(1024);
+	hash_table_set(ht, "betty", "cool");
+	return (EXIT_SUCCESS);
+}
+julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 3-main.c 0-hash_table_create.c 1-djb2.c 2-key_index.c 3-hash_table_set.c -o d
+julien@ubuntu:~/0x1A. Hash tables$
+
+If you want to test for collisions, here are some strings that collide using the djb2 algorithm:
+
+    hetairas collides with mentioner
+    heliotropes collides with neurospora
+    depravement collides with serafins
+    stylist collides with subgenera
+    joyful collides with synaphea
+    redescribed collides with urites
+    dram collides with vivency
+
+
+EW_Lesson Footer.png
+
+Repo:
+
+    GitHub repository: set-low_level_programming
+    Directory: hash_tables
+    File: 3-hash_table_set.c
+
+4. >>> ht['betty']
+mandatory
+
+EW_Lesson Header.png
+
+Write a function that retrieves a value associated with a key.
+
+    Prototype: char *hash_table_get(const hash_table_t *ht, const char *key);
+        where ht is the hash table you want to look into
+        and key is the key you are looking for
+    Returns the value associated with the element, or NULL if key couldn't be found
+
+julien@ubuntu:~/0x1A. Hash tables$ cat 4-main.c 
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include "hash_tables.h"
+
+/**
+ * main - check the code
+ *
+ * Return: Always EXIT_SUCCESS.
+ */
+int main(void)
+{
+	hash_table_t *ht;
+	char *value;
+
+	ht = hash_table_create(1024);
+	hash_table_set(ht, "c", "fun");
+	hash_table_set(ht, "python", "awesome");
+	hash_table_set(ht, "Bob", "and Kris love asm");
+	hash_table_set(ht, "N", "queens");
+	hash_table_set(ht, "Asterix", "Obelix");
+	hash_table_set(ht, "Betty", "Cool");
+	hash_table_set(ht, "98", "Battery Street");
+	hash_table_set(ht, "c", "isfun");
+
+	value = hash_table_get(ht, "python");
+	printf("%s:%s\n", "python", value);
+	value = hash_table_get(ht, "Bob");
+	printf("%s:%s\n", "Bob", value);
+	value = hash_table_get(ht, "N");
+	printf("%s:%s\n", "N", value);
+	value = hash_table_get(ht, "Asterix");
+	printf("%s:%s\n", "Asterix", value);
+	value = hash_table_get(ht, "Betty");
+	printf("%s:%s\n", "Betty", value);
+	value = hash_table_get(ht, "98");
+	printf("%s:%s\n", "98", value);
+	value = hash_table_get(ht, "c");
+	printf("%s:%s\n", "c", value);
+	value = hash_table_get(ht, "javascript");
+	printf("%s:%s\n", "javascript", value);
+	return (EXIT_SUCCESS);
+}
+julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 4-main.c 0-hash_table_create.c 1-djb2.c 2-key_index.c 3-hash_table_set.c 4-hash_table_get.c -o e
+julien@ubuntu:~/0x1A. Hash tables$ ./e 
+python:awesome
+Bob:and Kris love asm
+N:queens
+Asterix:Obelix
+Betty:Cool
+98:Battery Street
+c:isfun
+javascript:(null)
+julien@ubuntu:~/0x1A. Hash tables$ 
+
+
+EW_Lesson Footer.png
+
+Repo:
+
+    GitHub repository: set-low_level_programming
+    Directory: hash_tables
+    File: 4-hash_table_get.c
+
+5. >>> print(ht)
+mandatory
+
+EW_Lesson Header.png
+
+Write a function that prints a hash table.
+
+    Prototype: void hash_table_print(const hash_table_t *ht);
+        where ht is the hash table
+    You should print the key/value in the order that they appear in the array of hash table
+        Order: array, list
+    Format: see example
+    If ht is NULL, don't print anything
+
+julien@ubuntu:~/0x1A. Hash tables$ cat 5-main.c 
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include "hash_tables.h"
+
+/**
+ * main - check the code
+ *
+ * Return: Always EXIT_SUCCESS.
+ */
+int main(void)
+{
+	hash_table_t *ht;
+
+	ht = hash_table_create(1024);
+	hash_table_print(ht);
+	hash_table_set(ht, "c", "fun");
+	hash_table_set(ht, "python", "awesome");
+	hash_table_set(ht, "Bob", "and Kris love asm");
+	hash_table_set(ht, "N", "queens");
+	hash_table_set(ht, "Asterix", "Obelix");
+	hash_table_set(ht, "Betty", "Cool");
+	hash_table_set(ht, "98", "Battery Street");
+	hash_table_print(ht);
+	return (EXIT_SUCCESS);
+}
+julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 5-main.c 0-hash_table_create.c 1-djb2.c 2-key_index.c 3-hash_table_set.c 4-hash_table_get.c 5-hash_table_print.c -o f
+julien@ubuntu:~/0x1A. Hash tables$ ./f 
+{}
+{'Betty': 'Cool', 'python': 'awesome', 'Bob': 'and Kris love asm', '98': 'Battery Street', 'N': 'queens', 'c': 'fun', 'Asterix': 'Obelix'}
+julien@ubuntu:~/0x1A. Hash tables$ 
+
+
+EW_Lesson Footer.png
+
+Repo:
+
+    GitHub repository: set-low_level_programming
+    Directory: hash_tables
+    File: 5-hash_table_print.c
+
+6. >>> del ht
+mandatory
+
+EW_Lesson Header.png
+
+Write a function that deletes a hash table.
+
+    Prototype: void hash_table_delete(hash_table_t *ht);
+        where ht is the hash table
+
+julien@ubuntu:~/0x1A. Hash tables$ cat 6-main.c 
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include "hash_tables.h"
+
+/**
+ * main - check the code
+ *
+ * Return: Always EXIT_SUCCESS.
+ */
+int main(void)
+{
+	hash_table_t *ht;
+	char *key;
+	char *value;
+
+	ht = hash_table_create(1024);
+	hash_table_set(ht, "c", "fun");
+	hash_table_set(ht, "python", "awesome");
+	hash_table_set(ht, "Bob", "and Kris love asm");
+	hash_table_set(ht, "N", "queens");
+	hash_table_set(ht, "Asterix", "Obelix");
+	hash_table_set(ht, "Betty", "Cool");
+	hash_table_set(ht, "98", "Battery Streetz");
+	key = strdup("Tim");
+	value = strdup("Britton");
+	hash_table_set(ht, key, value);
+	key[0] = '\0';
+	value[0] = '\0';
+	free(key);
+	free(value);
+	hash_table_set(ht, "98", "Battery Street");	
+	hash_table_set(ht, "hetairas", "Bob");
+	hash_table_set(ht, "hetairas", "Bob Z");
+	hash_table_set(ht, "mentioner", "Bob");
+	hash_table_set(ht, "hetairas", "Bob Z Chu");
+	hash_table_print(ht);
+	hash_table_delete(ht);
+	return (EXIT_SUCCESS);
+}
+julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra 6-main.c 0-hash_table_create.c 1-djb2.c 2-key_index.c 3-hash_table_set.c 4-hash_table_get.c 5-hash_table_print.c 6-hash_table_delete.c -o g
+julien@ubuntu:~/0x1A. Hash tables$ valgrind ./g
+==6621== Memcheck, a memory error detector
+==6621== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==6621== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==6621== Command: ./g
+==6621== 
+{'Betty': 'Cool', 'mentioner': 'Bob', 'hetairas': 'Bob Z Chu', 'python': 'awesome', 'Bob': 'and Kris love asm', '98': 'Battery Street', 'N': 'queens', 'c': 'fun', 'Tim': 'Britton', 'Asterix': 'Obelix'}
+==6621== 
+==6621== HEAP SUMMARY:
+==6621==     in use at exit: 0 bytes in 0 blocks
+==6621==   total heap usage: 37 allocs, 37 frees, 8,646 bytes allocated
+==6621== 
+==6621== All heap blocks were freed -- no leaks are possible
+==6621== 
+==6621== For counts of detected and suppressed errors, rerun with: -v
+==6621== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+julien@ubuntu:~/0x1A. Hash tables$ 
+
+
+EW_Lesson Footer.png
+
+Repo:
+
+    GitHub repository: set-low_level_programming
+    Directory: hash_tables
+    File: 6-hash_table_delete.c
 
 Copyright © 2026 SET, All rights reserved.
+
